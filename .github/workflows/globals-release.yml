@@ -1,0 +1,14 @@
+# Padrao da Globals: nao editar aqui. Regras em https://github.com/weareglobals/.github/blob/main/GOVERNANCA.md
+# Fixado por commit do weareglobals/.github (atualizado pelo gov-bootstrap.sh), nunca @main.
+name: release
+on:
+  push:
+    branches: [main, master]
+permissions:
+  contents: write
+concurrency:
+  group: release-${{ github.repository }}
+  cancel-in-progress: false
+jobs:
+  release:
+    uses: weareglobals/.github/.github/workflows/release.yml@ce4794062fb9a409d741afbe39c1fe7b22776642
