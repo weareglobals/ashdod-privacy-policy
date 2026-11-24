@@ -1,0 +1,32 @@
+# Padrao da Globals: nao editar aqui. Regras em https://github.com/weareglobals/.github/blob/main/GOVERNANCA.md
+# Fixado por commit do weareglobals/.github (atualizado pelo gov-bootstrap.sh), nunca @main.
+# Pede a aprovacao humana no Google Chat quando o PR fica pronto (revisao de IA, conversas resolvidas, checks verdes).
+name: aprovacao
+on:
+  # synchronize: commit novo cancela a espera do commit anterior
+  pull_request:
+    types: [ready_for_review, synchronize]
+  pull_request_review:
+    types: [submitted]
+  # resposta numa conversa (so clicar em Resolver nao dispara workflow)
+  pull_request_review_comment:
+    types: [created]
+  issue_comment:
+    types: [created]
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  checks: read
+  statuses: read
+jobs:
+  aprovacao:
+    if: github.event_name != 'issue_comment' || (github.event.issue.pull_request && github.event.comment.user.login != 'github-actions[bot]')
+    # no job (nao no workflow): evento ignorado pelo if nao cancela a espera em andamento
+    concurrency:
+      group: aprovacao-${{ github.event.pull_request.number || github.event.issue.number }}
+      cancel-in-progress: true
+    uses: weareglobals/.github/.github/workflows/aprovacao.yml@85bafd097de1627dd602a64037016989295a86c6
+    # so o secret do aviso (menor privilegio): o workflow chamado nunca recebe os outros secrets do repo
+    secrets:
+      GCHAT_APROVACAO_WEBHOOK: ${{ secrets.GCHAT_APROVACAO_WEBHOOK }}

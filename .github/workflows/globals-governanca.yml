@@ -9,4 +9,4 @@ permissions:
   pull-requests: read
 jobs:
   governanca:
-    uses: weareglobals/.github/.github/workflows/governanca.yml@ce4794062fb9a409d741afbe39c1fe7b22776642
+    uses: weareglobals/.github/.github/workflows/governanca.yml@85bafd097de1627dd602a64037016989295a86c6
