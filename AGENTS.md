@@ -22,4 +22,5 @@ Escreva os comentarios da revisao em portugues. Os sistemas da Globals movimenta
 - P1: recurso com estado destruido ou substituido (banco, bucket, chave, volume, segredo), ou protecao removida (`prevent_destroy`, deletion protection, backup, versionamento, retencao).
 - P1: permissao ampliada (`*` em acao ou recurso, principal externo, condicao removida), rede aberta para `0.0.0.0/0` fora do balanceador publico, ou segredo em tfvars, manifesto ou variavel de pipeline.
 - P1: imagem por tag mutavel (`latest`) em producao, ou deploy de producao que pula a aprovacao ou o check obrigatorio.
+
 <!-- codex-review:end -->
